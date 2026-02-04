@@ -1,11 +1,12 @@
-<?php 
+<?php  
 $host = "localhost"; //hostname
 $db = "bitumi"; //database name
+$port = "3307"; //port to connect to (mysql configutation)
 $user = "root"; //username
 $password = ""; //password
 
 //points to the database
-$dsn = "mysql:host=$host;dbname=$db";
+$dsn = "mysql:host=$host;port=$port;dbname=$db";
 
 //try to connect, if connected echo a yay!
 try {

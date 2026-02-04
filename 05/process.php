@@ -24,13 +24,8 @@ $items = $_POST['items'] ?? [];
 $errors = [];
 
 // Required fields
-if ($firstName === null || $firstName === '') {
-    $errors[] = "First Name is required.";
-}
-
-if ($lastName === null || $lastName === '') {
-    $errors[] = "Last Name is required.";
-}
+if (empty($firstName)) { $errors[] = "First Name is required."; }
+if (empty($lastName)) { $errors[] = "Last Name is required."; }
 
 // Email: required + format check
 if ($email === null || $email === '') {
@@ -84,10 +79,70 @@ if (!empty($errors)) {
     exit;
 }
 
-
 /* 
 INSERT THE ORDER USING A PREPARED STATEMENT
 */
+
+//Query Setup
+$sql = 
+"INSERT INTO orders 
+(
+first_name, 
+last_name, 
+phone, 
+address, 
+email, 
+chaos_croissant, 
+midnight_muffin,
+existential_eclair,
+procrastination_cookie,
+finals_week_brownie,
+victory_cinnamon_roll, comments) 
+VALUES 
+(
+:first_name, 
+:last_name, 
+:phone, 
+:address, 
+:email, 
+:comments,
+:chaos_croissant, 
+:midnight_muffin,
+:existential_eclair,
+:procrastination_cookie,
+:finals_week_brownie,
+:victory_cinnamon_roll
+)";
+
+//Query Prep
+$stmt = $pdo->prepare($sql);
+
+//Bind Customer Info Parms
+$stmt->bindParam(":first_name", $firstName);
+$stmt->bindParam(":last_name", $firstName);
+$stmt->bindParam(":phone", $phone);
+$stmt->bindParam(":address", $address);
+$stmt->bindParam(":email", $email);
+$stmt->bindParam(":comments", $comments);
+
+//Order Variables
+$chaosCroissant = $itemsOrdered["chaos_croissant"] ?? 0;
+$midnightMuffin = $itemsOrdered["midnight_muffin"] ?? 0;
+$existentialEclair = $itemsOrdered["existential_eclair"] ?? 0;
+$procrastinationCookie = $itemsOrdered["procrastination_cookie"] ?? 0;
+$finalsWeekBrownie = $itemsOrdered["finals_week_brownie"] ?? 0;
+$victoryCinnamonRoll = $itemsOrdered["victory_cinnamon_roll"] ?? 0;
+
+//Bind Order Params
+$stmt->bindParam(":chaos_croissant", $chaosCroissant);
+$stmt->bindParam(":midnight_muffin", $midnightMuffin);
+$stmt->bindParam(":existential_eclair", $existentialEclair);
+$stmt->bindParam(":procrastination_cookie", $procrastinationCookie);
+$stmt->bindParam(":finals_week_brownie", $finalsWeekBrownie);
+$stmt->bindParam(":victory_cinnamon_roll", $victoryCinnamonRoll);
+
+//Execute Query
+$stmt->execute();
 
 ?>
 
