@@ -1,18 +1,25 @@
 <?php
-require "includes/header.php";
-//  TODO: connect to the database 
+require "includes/connect.php";
 
-//   TODO: Grab form data (no validation or sanitization for this lab)
+// #region Process Form Data 
+// ---------------------------------------------------------------------- //
+// Grab form data (no validation or sanitization for this lab)
+$firstName = $_POST["first_name"];
+$lastName = $_POST["last_name"];
+$email = $_POST["email"];
 
-/*
-  1. Write an INSERT statement with named placeholders
-  2. Prepare the statement
-  3. Execute the statement with an array of values
-  4.
+//  1. Write an INSERT statement with named placeholders
+$sql = "INSERT INTO subscribers (first_name, last_name, email) VALUES (:first_name, :last_name, :email)";
 
-*/
+//  2. Prepare the statement
+$stmt = $pdo->prepare($sql);
 
+//  3. Execute the statement with an array of values (binds values as well)
+$stmt->execute(["first_name"=>$firstName, "last_name"=>$lastName, "email"=>$email]);
+// ---------------------------------------------------------------------- //
+#endregion Process Form Data
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,9 +34,8 @@ require "includes/header.php";
     <main class="container mt-4">
         <h2>Thank You for Subscribing</h2>
 
-        <!-- TODO: Display a confirmation message -->
-        <!-- Example: "Thanks, Name! You have been added to our mailing list." -->
-
+        <!-- Display confirmation message -->
+        <p>Thanks, <?php echo htmlspecialchars($firstName)?>! You have been added to our mailing list.</p>
 
         <p class="mt-3">
             <a href="subscribers.php">View Subscribers</a>
