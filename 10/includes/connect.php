@@ -3,9 +3,10 @@ $host = "localhost"; //hostname
 $db = "bitumi"; //database name
 $user = "root"; //username
 $password = ""; //password
+$port = "3307";
 
 //points to the database
-$dsn = "mysql:host=$host;dbname=$db";
+$dsn = "mysql:host=$host;port=$port;dbname=$db";
 
 //try to connect, if connected echo a yay!
 try {
