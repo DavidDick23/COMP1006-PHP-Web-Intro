@@ -7,7 +7,7 @@
 $currentUser = getCurrentUser(); // returns null if not logged in
 ?>
 <header class="d-flex justify-content-between align-items-center py-3 border-bottom mb-3">
-    <h1 class="site-title h4 mb-0"><a href="index.php" class="text-decoration-none">Task Time Tracker</a></h1>
+    <h1 class="site-title h4 mb-0"><a href="index.php" class="text-decoration-none">Image Gallery Viewer</a></h1>
     <nav>
         <?php if ($currentUser): ?>
             <!-- Hello Message -->

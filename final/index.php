@@ -22,11 +22,8 @@ requireLogin();
             <!-- Section: Header -->
             <?php include "./includes/header.php" ?>
             
-            <!-- Section: Main -->
-            <main class="mt-4"> 
-                <!-- TODO: add image gallery -->
-
-            </main>
+            <!-- Display Gallery (only files are displayed, ran out of time due to debuggin) -->
+            <?php include "./read.php" ?>
 
             <!-- Section: Footer -->
             <?php include "./includes/footer.php" ?>
